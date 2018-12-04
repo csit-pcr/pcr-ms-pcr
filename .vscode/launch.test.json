@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "pcr-ms-pcr",
+                "projectName": "pcr-ms-pcr",
+                "workingDirectory": "c:\\Users\\branda\\Desktop\\Vue Projects\\pcr-ms-pcr",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "pcr-ms-pcr",
+                "projectName": "pcr-ms-pcr",
+                "workingDirectory": "c:\\Users\\branda\\Desktop\\Vue Projects\\pcr-ms-pcr",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}
