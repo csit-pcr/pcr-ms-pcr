@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 import java.io.Serializable;
-import java.util.Date;
+// import java.util.Date;
 
 @Entity
 @Table(name="portFilteringDetails")
@@ -22,7 +22,7 @@ public class PortFilteringDetails implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String portdetailsid;
+    private String port_details_id;
 
     @NotBlank
     private String source_hostname;
@@ -38,13 +38,13 @@ public class PortFilteringDetails implements Serializable {
 
     @NotBlank
     @ManyToOne
-    @JoinColumn(name = "request_no")
-    private String cr_id;
+    @JoinColumn(name = "FK_request_no")
+    private ChangeRequest cr_id;
 
     //Start of Getters
 
     public String getPortDetailsID() {
-        return this.portdetailsid;
+        return this.port_details_id;
     }
 
     public String getSourceHostname() {
@@ -63,14 +63,14 @@ public class PortFilteringDetails implements Serializable {
         return this.port_no;
     }
 
-    public String getCRID() {
+    public ChangeRequest getCRID() {
         return this.cr_id;
     }
 
     //Start of Setters
 
     public void setEmployeeNo(String portDetailsID) {
-        this.portdetailsid = portDetailsID;
+        this.port_details_id = portDetailsID;
     }
 
     public void setSourceHostname(String sourceHostname) {
@@ -88,7 +88,7 @@ public class PortFilteringDetails implements Serializable {
     public void setPortNo(Double portNo) {
         this.port_no = portNo;
     }
-
-    //not sure if need to set the CRID
+    
+    //Not sure if need to set a foreign key 
     
 }

@@ -21,8 +21,8 @@ public class Files implements Serializable {
 
     @NotBlank
     @ManyToOne
-    @JoinColumn(name = "request_no")
-    private String cr_id;
+    @JoinColumn(name = "FK_CR_ID")
+    private ChangeRequest cr_id;
 
     //Start of Getters
 
@@ -34,9 +34,9 @@ public class Files implements Serializable {
         return this.file;
     }
 
-    // public String getCRID() {
-    //     return this.cr_id;
-    // }
+    public ChangeRequest getCRID() {
+        return this.cr_id;
+    }
 
     //Start of Setters
 
@@ -48,4 +48,6 @@ public class Files implements Serializable {
         this.file = file;
     }
     
+        
+    //Not sure if need to set a foreign key 
 }

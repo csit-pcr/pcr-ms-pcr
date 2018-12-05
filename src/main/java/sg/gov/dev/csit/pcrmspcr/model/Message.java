@@ -1,14 +1,18 @@
 package sg.gov.dev.csit.pcrmspcr.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+//Spring imports
 // import org.springframework.data.annotation.CreatedDate;
 // import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+//Javax imports
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+//Java Imports
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @Table(name="message")
@@ -30,10 +34,9 @@ public class Message implements Serializable {
     @NotBlank
     private String remarks;
 
-    @NotBlank
     @OneToOne
-    @JoinColumn(name = "request_no")
-    private String cr_id;
+    @JoinColumn(name = "FK_request_no")
+    private ChangeRequest cr_id;
 
     //Start of Getters
 
@@ -49,7 +52,7 @@ public class Message implements Serializable {
         return this.remarks;
     }
 
-    public String getCRID() {
+    public ChangeRequest getCRID() {
         return this.cr_id;
     }
 
@@ -67,4 +70,5 @@ public class Message implements Serializable {
         this.remarks = remarks;
     }
     
+    //Not sure if need to set a foreign key 
 }

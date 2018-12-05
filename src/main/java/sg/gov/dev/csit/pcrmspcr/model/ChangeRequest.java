@@ -1,14 +1,21 @@
 package sg.gov.dev.csit.pcrmspcr.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-// import org.springframework.data.annotation.CreatedDate;
-// import org.springframework.data.annotation.LastModifiedDate;
+
+//Spring Imports
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+//Javax imports
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+//Java imports
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
+
 
 @Entity
 @Table(name="changerequest")
@@ -61,7 +68,7 @@ public class ChangeRequest implements Serializable {
 
     private Section assign_to;
 
-    @Column(nullable = false, updatable=true)
+    @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date start_by;
 
@@ -72,7 +79,7 @@ public class ChangeRequest implements Serializable {
     @NotBlank
     private String deployment_plan;
 
-    private String files[];
+    // private String files[];
 
     @NotBlank
     private String project_name;
@@ -98,16 +105,35 @@ public class ChangeRequest implements Serializable {
 
     @NotBlank
     private String taskee_id;
-    
-    // @Column(nullable = false, updatable=false)
-    // @Temporal(TemporalType.TIMESTAMP)
-    // @CreatedDate
-    // private Date createdAt;
 
-    // @Column(nullable = false)
-    // @Temporal(TemporalType.TIMESTAMP)
-    // @LastModifiedDate
-    // private Date updatedAt;
+    //Mapping to the Message(Taskee&Tasker) <interface>-Child
+    
+    @OneToOne(mappedBy="cr_id", cascade = CascadeType.ALL)
+    private Set <TaskerMessage> taskermessage;
+
+    @OneToOne(mappedBy="cr_id", cascade = CascadeType.ALL)
+    private Set <TaskeeMessage> taskeemessage;
+
+    //Mapping to the Files <Entity>-Child
+
+    @OneToMany(mappedBy="cr_id", cascade = CascadeType.ALL)
+    private Set <Files> files;
+
+    //Mapping to the Tasker <Entity>-Parent
+
+    @OneToOne
+    @JoinColumn(name = "FK_tasker_ID")
+    private Tasker fk_tasker_id;
+    
+    @Column(nullable = false, updatable=false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private Date createdAt;
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+    private Date updatedAt;
 
 
     //Start of Getters
@@ -153,9 +179,9 @@ public class ChangeRequest implements Serializable {
         return this.done_by;
     }
 
-    public String[] getFiles() {
-        return this.files;
-    }
+    // public String[] getFiles() {
+    //     return this.files;
+    // }
     
     public String getProjectName() {
         return this.project_name;
@@ -231,9 +257,9 @@ public class ChangeRequest implements Serializable {
         this.deployment_plan = deploymentPlan;
     }
 
-    public void setFiles (String[] files) {
-        this.files = files;
-    }
+    // public void setFiles (String[] files) {
+    //     this.files = files;
+    // }
     public void setProjectName(String projectName) {
         this.project_name = projectName;
     }

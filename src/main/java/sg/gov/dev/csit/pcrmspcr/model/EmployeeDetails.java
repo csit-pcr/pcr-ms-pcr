@@ -7,10 +7,10 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
-@Table(name="employeeDetails")
+// @Table(name="employeeDetails")
 @EntityListeners(AuditingEntityListener.class)
 
-public class EmployeeDetails implements Serializable {
+public abstract class EmployeeDetails implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
