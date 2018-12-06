@@ -1,10 +1,6 @@
 package sg.gov.dev.csit.pcrmspcr.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 //Spring imports
-// import org.springframework.data.annotation.CreatedDate;
-// import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 //Javax imports
@@ -17,8 +13,7 @@ import java.io.Serializable;
 @Entity
 @Table(name="message")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value= {"createdAt", "updatedAt"},
-            allowGetters=true)
+
 //Prevent specified files from being serializable or deserialized
 
 public class Message implements Serializable {

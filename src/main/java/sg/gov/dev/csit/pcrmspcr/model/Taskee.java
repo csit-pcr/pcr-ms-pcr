@@ -1,17 +1,18 @@
 package sg.gov.dev.csit.pcrmspcr.model;
 
+//Classes imports
 import sg.gov.dev.csit.pcrmspcr.model.EmployeeDetails;
 
-//Spring imported
+//Spring imports
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-//Javax imported
+//Javax imports
 import javax.persistence.*;
 
-//Java imported
+//Java imports
 import java.io.Serializable;
 import java.util.Set;
-
+import java.util.concurrent.ThreadLocalRandom;
 
 @Entity
 @Table(name="Taskee")
@@ -21,17 +22,17 @@ public class Taskee extends EmployeeDetails implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String taskee_id;
+    private RandomString taskee_id = new RandomString(8, ThreadLocalRandom.current());
 
     //Mapping to Change Request <entity> - Child 
     @OneToOne(mappedBy="fk_taskee_id", cascade = CascadeType.ALL)
     private Set <ChangeRequest> requests;
 
-    public String getTaskerID() {
+    public RandomString getTaskerID() {
         return this.taskee_id;
     }
 
-    public void setTaskerID(String taskerID) {
+    public void setTaskerID(RandomString taskerID) {
         this.taskee_id = taskerID;
     }
 

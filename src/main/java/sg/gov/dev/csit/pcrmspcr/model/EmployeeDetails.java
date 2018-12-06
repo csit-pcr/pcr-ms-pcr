@@ -1,9 +1,13 @@
 package sg.gov.dev.csit.pcrmspcr.model;
 
+//Spring imports
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+//Javax imports
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+//Java imports
 import java.io.Serializable;
 
 @Entity

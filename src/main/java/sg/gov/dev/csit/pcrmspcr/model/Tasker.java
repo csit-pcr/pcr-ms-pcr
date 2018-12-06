@@ -3,15 +3,16 @@ package sg.gov.dev.csit.pcrmspcr.model;
 //Classes imported or used
 import sg.gov.dev.csit.pcrmspcr.model.EmployeeDetails;
 
-//Spring imported
+//Spring imports
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-//Javax imported
+//Javax imports
 import javax.persistence.*;
 
-//Java imported
+//Java imports
 import java.io.Serializable;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Entity
 @Table(name="Tasker")
@@ -21,7 +22,7 @@ public class Tasker extends EmployeeDetails implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String tasker_id;
+    private RandomString tasker_id = new RandomString(8, ThreadLocalRandom.current());
 
     private String[] directorate_assigned;
 
@@ -33,7 +34,7 @@ public class Tasker extends EmployeeDetails implements Serializable{
 
     //Start of Getters
 
-    public String getTaskerID() {
+    public RandomString getTaskerID() {
         return this.tasker_id;
     }    
 
@@ -47,7 +48,7 @@ public class Tasker extends EmployeeDetails implements Serializable{
 
     //Start of Setters
 
-    public void setTaskerID(String taskerID) {
+    public void setTaskerID(RandomString taskerID) {
         this.tasker_id = taskerID;
     }
 

@@ -15,6 +15,7 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 @Entity
@@ -26,10 +27,10 @@ import java.util.Set;
 
 public class ChangeRequest implements Serializable {
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String request_no;
+    private RandomString request_no = new RandomString(8, ThreadLocalRandom.current());
 
     @NotBlank
     private String request_name;
@@ -119,11 +120,24 @@ public class ChangeRequest implements Serializable {
     @OneToMany(mappedBy="cr_id", cascade = CascadeType.ALL)
     private Set <Files> files;
 
-    //Mapping to the Tasker <Entity>-Parent
+    //Mapping to the Tasker,Requestor,Taskee,Approver <Entity>-Parent
+
+    @OneToOne
+    @JoinColumn(name = "FK_requestor_ID")
+    private Requestor fk_requestor_id;
+
+    @OneToOne
+    @JoinColumn(name = "FK_approver_ID")
+    private Approver fk_approver_id;
 
     @OneToOne
     @JoinColumn(name = "FK_tasker_ID")
     private Tasker fk_tasker_id;
+
+    @OneToOne
+    @JoinColumn(name = "FK_taskee_ID")
+    private Taskee fk_taskee_id;
+
     
     @Column(nullable = false, updatable=false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -138,7 +152,7 @@ public class ChangeRequest implements Serializable {
 
     //Start of Getters
 
-    public String getRequestNo() {
+    public RandomString getRequestNo() {
         return this.request_no;
     }
 
@@ -213,7 +227,7 @@ public class ChangeRequest implements Serializable {
 
     // Start of Setters
 
-    public void setRequestNo(String requestNo) {
+    public void setRequestNo(RandomString requestNo) {
         this.request_no = requestNo;
     }
 

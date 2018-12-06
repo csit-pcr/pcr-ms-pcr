@@ -1,10 +1,15 @@
 package sg.gov.dev.csit.pcrmspcr.model;
 
+//Classes imported or used
 import sg.gov.dev.csit.pcrmspcr.model.Message;
 
+//Spring imports
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+//Javax imports
 import javax.persistence.*;
 
+//Java imports
 import java.io.Serializable;
 
 @Entity

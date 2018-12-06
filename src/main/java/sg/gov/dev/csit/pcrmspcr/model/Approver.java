@@ -3,15 +3,16 @@ package sg.gov.dev.csit.pcrmspcr.model;
 //Classes that are imported or used
 import sg.gov.dev.csit.pcrmspcr.model.EmployeeDetails;
 
-//Spring imported
+//Spring imports
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-//Javax imported
+//Javax imports
 import javax.persistence.*;
 
-//Java imported
+//Java imports
 import java.io.Serializable;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Entity
 @Table(name="Approver")
@@ -21,13 +22,13 @@ public class Approver extends EmployeeDetails implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String approver_id;
+    private RandomString approver_id = new RandomString(8, ThreadLocalRandom.current());
 
     private String[] directorate_assigned;
 
     private String[] section_assigned;
 
-    public String getApproverID() {
+    public RandomString getApproverID() {
         return this.approver_id;
     }
 
@@ -47,7 +48,7 @@ public class Approver extends EmployeeDetails implements Serializable{
 
     //Start of Setters 
 
-    public void setApproverID(String approverID) {
+    public void setApproverID(RandomString approverID) {
         this.approver_id = approverID;
     }
 
